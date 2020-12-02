@@ -27,7 +27,7 @@ def step2(sumValue, arr):
 
 startTime = time.time()
 
-puzzleInput = open(f'{os.getcwd()}/day1/input.txt').read().split('\n')
+puzzleInput = open(f'{os.getcwd()}/day1/input').read().split('\n')
 puzzleInput = [int(num) for num in puzzleInput]
 
 print(step1(2020, puzzleInput))

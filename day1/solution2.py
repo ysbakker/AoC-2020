@@ -27,7 +27,7 @@ def step2(sumValue, arr):
             return val * result
 
 
-puzzleInput = open(f'{os.getcwd()}/day1/input.txt').read().split('\n')
+puzzleInput = open(f'{os.getcwd()}/day1/input').read().split('\n')
 puzzleInput = [int(num) for num in puzzleInput]
 
 startTime = time.time()
