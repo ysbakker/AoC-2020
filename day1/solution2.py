@@ -27,17 +27,13 @@ def step2(sumValue, arr):
             return val * result
 
 
-puzzleInput = open(f'{os.getcwd()}/day1/input').read().split('\n')
-puzzleInput = [int(num) for num in puzzleInput]
+with open(f'{os.getcwd()}/day1/input') as inputFile:
+    puzzleInput = [int(num) for num in inputFile.read().split('\n')]
 
-startTime = time.time()
+    startTime = time.time()
+    print(step1(2020, puzzleInput))
+    print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
 
-print(step1(2020, puzzleInput))
-
-print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
-
-startTime = time.time()
-
-print(step2(2020, puzzleInput))
-
-print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')
+    startTime = time.time()
+    print(step2(2020, puzzleInput))
+    print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')

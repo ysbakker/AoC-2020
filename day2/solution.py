@@ -49,12 +49,12 @@ def step2(puzzleInput):
     return count
 
 
-puzzleInput = open(f'{os.getcwd()}/day2/input').read().split('\n')
+with open(f'{os.getcwd()}/day2/input') as inputFile:
+    puzzleInput = inputFile.read().split('\n')
+    startTime = time.time()
+    print(step1(puzzleInput))
+    print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
 
-startTime = time.time()
-print(step1(puzzleInput))
-print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
-
-startTime = time.time()
-print(step2(puzzleInput))
-print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')
+    startTime = time.time()
+    print(step2(puzzleInput))
+    print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')
