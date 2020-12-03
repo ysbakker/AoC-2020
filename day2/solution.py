@@ -29,6 +29,7 @@ def parse(passwords):
     return result
 
 
+# O(n)
 def step1(puzzleInput):
     passwords = parse(puzzleInput)
     count = 0
@@ -39,6 +40,7 @@ def step1(puzzleInput):
     return count
 
 
+# O(n)
 def step2(puzzleInput):
     passwords = parse(puzzleInput)
     count = 0
