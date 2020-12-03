@@ -6,10 +6,10 @@ import os, time
 # O(n) -> n = len(grid)
 def calculateTreeColissions(grid, slopex, slopey):
     i = 0
-    width = len(grid[0]) - 1
+    width = len(grid[0])
     colissions = 0
     while i * slopey < len(grid):
-        if grid[i * slopey][(i * slopex) % (width + 1)] == '#': colissions += 1
+        if grid[i * slopey][(i * slopex) % (width)] == '#': colissions += 1
         i += 1
 
     return colissions
