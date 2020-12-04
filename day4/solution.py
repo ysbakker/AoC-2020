@@ -30,14 +30,14 @@ def validate(key, value):
     elif key == 'hcl':
         return re.compile(r'^#[\da-f]{6}$').match(value) is not None
     elif key == 'ecl':
-        return value in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+        return value in ('amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth')
     elif key == 'pid':
         return re.compile(r'^\d{9}$').match(value) is not None
 
 
 def step1(puzzleInput):
     valid = 0
-    required = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
+    required = ('byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid')
     passports = parse(puzzleInput)
     for passport in passports:
         if all([passport.get(field) is not None for field in required]):
@@ -47,7 +47,7 @@ def step1(puzzleInput):
 
 def step2(puzzleInput):
     valid = 0
-    required = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
+    required = ('byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid')
     passports = parse(puzzleInput)
     for passport in passports:
         if all([validate(field, passport.get(field)) for field in required]):
@@ -59,10 +59,10 @@ with open(f'{os.getcwd()}/day4/input') as inputFile:
     puzzleInput = inputFile.read().split('\n\n')
     startTime = time.time()
     print(step1(puzzleInput))
-    print(f'Step 1 execution time: {(time.time() - startTime) / 10}ms')
-    # 2.061128616333008ms
+    print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
+    # ~ 2-4ms
 
     startTime = time.time()
     print(step2(puzzleInput))
-    print(f'Step 2 execution time: {(time.time() - startTime) / 10}ms')
-    # 9.064912796020508ms
+    print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')
+    # ~ 7-9ms
