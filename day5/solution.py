@@ -4,10 +4,11 @@ import os, time
 
 
 def parseBinary(inpt):
-    return int(
-        inpt.replace('B', '1').replace('R',
-                                       '1').replace('F',
-                                                    '0').replace('L', '0'), 2)
+    inpt = inpt.replace('B', '1')
+    inpt = inpt.replace('R', '1')
+    inpt = inpt.replace('F', '0')
+    inpt = inpt.replace('L', '0')
+    return int(inpt, 2)
 
 
 def getSeats(inpt):
@@ -35,9 +36,9 @@ with open(f'{os.getcwd()}/day5/input') as inputFile:
     startTime = time.time()
     print(step1(puzzleInput))
     print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
-    # ~ 2-4 ms
+    # ~ 2-3 ms
 
     startTime = time.time()
     print(step2(puzzleInput))
     print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')
-    # ~ 2-4 ms
+    # ~ 2-3 ms
