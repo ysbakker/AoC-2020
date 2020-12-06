@@ -4,10 +4,7 @@ import os, time
 
 
 def uniqueAnswers(groupAnswers):
-    unique = 0
-    for answer in groupAnswers:
-        unique += len(set(answer.replace('\n', '')))
-    return unique
+    return sum([len(set(answer.replace('\n', ''))) for answer in groupAnswers])
 
 
 def unanimousAnswers(groupAnswers):
