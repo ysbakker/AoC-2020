@@ -16,15 +16,6 @@ def parse(inp):
     return rules
 
 
-def findColor(rules, color):
-    matches = set()
-    for parent in rules:
-        for child in rules[parent]:
-            if (child[1] == color):
-                matches.add(parent)
-    return matches
-
-
 def countBags(rules, color):
     count = 0
     for child in rules[color]:
@@ -34,17 +25,19 @@ def countBags(rules, color):
 
 def step1(puzzleInput):
     rules = parse(puzzleInput)
-    colors = findColor(rules, 'shiny gold')
-    length = [0, len(colors)]
-    while length[0] != length[1]:
-        length[0] = length[1]
-        newColors = set()
-        for color in colors:
-            newColors.update(findColor(rules, color))
-        colors.update(newColors)
-        length[1] = len(colors)
+    bagsWithGold = {'shiny gold'}
+    seen = set()
+    done = False
+    while not done:
+        done = True
+        for bag in rules:
+            for content in rules[bag]:
+                if content[1] in bagsWithGold and bag not in seen:
+                    done = False
+                    bagsWithGold.add(bag)
+                    seen.add(bag)
 
-    return len(colors)
+    return len(seen)
 
 
 def step2(puzzleInput):
@@ -57,9 +50,9 @@ with open(f'{os.getcwd()}/day7/input') as inputFile:
     startTime = time.time()
     print(step1(puzzleInput))
     print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
-    # ~  ms
+    # ~ 10 ms
 
     startTime = time.time()
     print(step2(puzzleInput))
     print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')
-    # ~  ms
+    # ~ 5 ms
