@@ -1,6 +1,6 @@
 # https://adventofcode.com/2020/day/7
 
-import os, time
+import os, timeit
 
 
 def parse(inp):
@@ -47,12 +47,11 @@ def step2(puzzleInput):
 
 with open(f'{os.getcwd()}/day7/input') as inputFile:
     puzzleInput = inputFile.read().split('.\n')
-    startTime = time.time()
     print(step1(puzzleInput))
-    print(f'Step 1 execution time: {(time.time() - startTime) * 1000}ms')
-    # ~ 10 ms
-
-    startTime = time.time()
     print(step2(puzzleInput))
-    print(f'Step 2 execution time: {(time.time() - startTime) * 1000}ms')
-    # ~ 5 ms
+    print(
+        f'Step 1 avg: {timeit.timeit(lambda: step1(puzzleInput), number=1000)}ms'
+    )  # 4-6ms
+    print(
+        f'Step 2 avg: {timeit.timeit(lambda: step2(puzzleInput), number=1000)}ms'
+    )  # 3-5ms
