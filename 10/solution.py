@@ -45,7 +45,7 @@ with open(f'{os.getcwd()}/day10/input') as inputFile:
     print(step2(puzzleInput))
     print(
         f'Step 1 avg: {timeit.timeit(lambda: step1(puzzleInput), number=1000)}ms'
-    )  # <1ms
+    )
     print(
         f'Step 2 avg: {timeit.timeit(lambda: step2(puzzleInput), number=1000)}ms'
-    )  # ~10ms
+    )
