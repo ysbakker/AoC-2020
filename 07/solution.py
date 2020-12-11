@@ -45,7 +45,7 @@ def step2(puzzleInput):
     return countBags(rules, 'shiny gold')
 
 
-with open(f'{os.getcwd()}/day7/input') as inputFile:
+with open(f'{os.getcwd()}/07/input') as inputFile:
     puzzleInput = inputFile.read().split('.\n')
     print(step1(puzzleInput))
     print(step2(puzzleInput))

@@ -28,7 +28,7 @@ def step2(sumValue, arr):
             return val * result
 
 
-with open(f'{os.getcwd()}/day1/input') as inputFile:
+with open(f'{os.getcwd()}/01/input') as inputFile:
     puzzleInput = [int(num) for num in inputFile.read().split('\n')]
 
     startTime = time.time()

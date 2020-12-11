@@ -39,7 +39,7 @@ def step2(puzzleInput):
     return paths[max(joltages)]
 
 
-with open(f'{os.getcwd()}/day10/input') as inputFile:
+with open(f'{os.getcwd()}/10/input') as inputFile:
     puzzleInput = inputFile.read()
     print(step1(puzzleInput))
     print(step2(puzzleInput))

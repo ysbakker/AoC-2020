@@ -53,7 +53,7 @@ def step2(puzzleInput):
     return count
 
 
-with open(f'{os.getcwd()}/day2/input') as inputFile:
+with open(f'{os.getcwd()}/02/input') as inputFile:
     puzzleInput = inputFile.read().split('\n')
     startTime = time.time()
     print(step1(puzzleInput))

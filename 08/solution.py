@@ -39,7 +39,7 @@ def step2(puzzleInput):
         instruction[0] = 'jmp' if instruction[0] == 'nop' else 'nop'
 
 
-with open(f'{os.getcwd()}/day8/input') as inputFile:
+with open(f'{os.getcwd()}/08/input') as inputFile:
     puzzleInput = inputFile.read()
     print(step1(puzzleInput))
     print(step2(puzzleInput))

@@ -28,7 +28,7 @@ def step2(grid):
     return product
 
 
-with open(f'{os.getcwd()}/day3/input') as inputFile:
+with open(f'{os.getcwd()}/03/input') as inputFile:
     puzzleInput = inputFile.read().split('\n')
     startTime = time.time()
     print(step1(puzzleInput))

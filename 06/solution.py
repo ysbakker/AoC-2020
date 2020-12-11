@@ -27,7 +27,7 @@ def step2(puzzleInput):
     return unanimousAnswers(puzzleInput)
 
 
-with open(f'{os.getcwd()}/day6/input') as inputFile:
+with open(f'{os.getcwd()}/06/input') as inputFile:
     puzzleInput = inputFile.read().split('\n\n')
     startTime = time.time()
     print(step1(puzzleInput))

@@ -55,7 +55,7 @@ def step2(puzzleInput):
     return valid
 
 
-with open(f'{os.getcwd()}/day4/input') as inputFile:
+with open(f'{os.getcwd()}/04/input') as inputFile:
     puzzleInput = inputFile.read().split('\n\n')
     startTime = time.time()
     print(step1(puzzleInput))

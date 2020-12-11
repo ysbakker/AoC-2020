@@ -39,7 +39,7 @@ def step2(puzzleInput):
     return findSum(transmission, step1(puzzleInput))
 
 
-with open(f'{os.getcwd()}/day9/input') as inputFile:
+with open(f'{os.getcwd()}/09/input') as inputFile:
     puzzleInput = inputFile.read()
     print(step1(puzzleInput))
     print(step2(puzzleInput))
