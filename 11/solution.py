@@ -1,4 +1,5 @@
-# https://adventofcode.com/2020/day/10
+# https://adventofcode.com/2020/day/11
+# Not proud of this.
 
 import os, timeit
 
