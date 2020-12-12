@@ -4,32 +4,32 @@ import os, timeit
 
 def moveShip(instruction, pos):
     ins, val = instruction
-    deg = pos[0]
-    if ins == 'N': pos[2] += val
-    elif ins == 'S': pos[2] -= val
-    elif ins == 'E': pos[1] += val
-    elif ins == 'W': pos[1] -= val
-    elif ins == 'L': pos[0] = (deg - val + 360) % 360
-    elif ins == 'R': pos[0] = (deg + val) % 360
-    elif ins == 'F': pos[deg // 90 % 2 + 1] += val if deg in (0, 270) else -val
+    new = pos[:]
+    if ins == 'N': new[2] += val
+    elif ins == 'S': new[2] -= val
+    elif ins == 'E': new[1] += val
+    elif ins == 'W': new[1] -= val
+    elif ins == 'L': new[0] = (pos[0] - val + 360) % 360
+    elif ins == 'R': new[0] = (pos[0] + val) % 360
+    elif ins == 'F':
+        new[pos[0] // 90 % 2 + 1] += val if pos[0] in (0, 270) else -val
+    return new
 
 
 def moveWaypoint(instruction, pos):
     ins, val = instruction
-    if ins == 'N': pos[1] += val
-    elif ins == 'S': pos[1] -= val
-    elif ins == 'E': pos[0] += val
-    elif ins == 'W': pos[0] -= val
+    new = pos[:]
+    if ins == 'N': new[1] += val
+    elif ins == 'S': new[1] -= val
+    elif ins == 'E': new[0] += val
+    elif ins == 'W': new[0] -= val
     elif ins == 'L':
-        new = (pos[val // 90 % 2] * (-1 if val in (90, 180) else 1),
-               pos[(val // 90 + 1) % 2] * (-1 if val in (180, 270) else 1))
-        pos[0] = new[0]
-        pos[1] = new[1]
+        new[0] = pos[val // 90 % 2] * (-1 if val in (90, 180) else 1)
+        new[1] = pos[(val // 90 + 1) % 2] * (-1 if val in (180, 270) else 1)
     elif ins == 'R':
-        new = (pos[val // 90 % 2] * (-1 if val in (180, 270) else 1),
-               pos[(val // 90 + 1) % 2] * (-1 if val in (90, 180) else 1))
-        pos[0] = new[0]
-        pos[1] = new[1]
+        new[0] = pos[val // 90 % 2] * (-1 if val in (180, 270) else 1)
+        new[1] = pos[(val // 90 + 1) % 2] * (-1 if val in (90, 180) else 1)
+    return new
 
 
 def solve(inp, part):
@@ -37,19 +37,16 @@ def solve(inp, part):
     if part == 1:
         ship = [0, 0, 0]  # deg, x, y
         for instruction in instructions:
-            moveShip(instruction, ship)
+            ship = moveShip(instruction, ship)
         return abs(ship[1]) + abs(ship[2])
     if part == 2:
         waypoint = [10, 1]  # x, y
         ship = [0, 0]  # x, y
         for instruction in instructions:
+            waypoint = moveWaypoint(instruction, waypoint)
             if (instruction[0] == 'F'):
-                ship = [
-                    ship[0] + instruction[1] * waypoint[0],
-                    ship[1] + instruction[1] * waypoint[1]
-                ]
-            else:
-                moveWaypoint(instruction, waypoint)
+                ship[0] = ship[0] + instruction[1] * waypoint[0]
+                ship[1] = ship[1] + instruction[1] * waypoint[1]
         return abs(ship[0]) + abs(ship[1])
 
 
