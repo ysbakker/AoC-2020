@@ -44,5 +44,5 @@ with open(f'{os.getcwd()}/14/input') as inputFile:
         f'Part 1 avg: {timeit.timeit(lambda: solve(puzzleInput, 1), number=1000)}ms'
     )
     print(
-        f'Part 2 avg: {timeit.timeit(lambda: solve(puzzleInput, 2), number=1000)}ms'
+        f'Part 2 avg: {timeit.timeit(lambda: solve(puzzleInput, 2), number=1) * 1000}ms'
     )
