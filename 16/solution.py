@@ -1,9 +1,5 @@
 # https://adventofcode.com/2020/day/16
-import os, timeit
-
-
-def between(val, b1, b2):
-    return b1 <= val <= b2
+import os, timeit, math
 
 
 def solve(inp, part):
@@ -11,46 +7,48 @@ def solve(inp, part):
     mine = [int(val) for val in mine.split('\n')[1].split(',')]
     tickets = [[int(val) for val in t.split(',')]
                for t in tickets.split('\n')[1:]]
-    allRules = list()
-    for r in rules.split('\n'):
-        allRules.append([int(b) for b in r.split(' ')[-1].split('-')])
-        allRules.append([int(b) for b in r.split(' ')[-3].split('-')])
-    validCache = set()
+    rules = [
+        r.split(' ')[-1].split('-') + r.split(' ')[-3].split('-')
+        for r in rules.split('\n')
+    ]
+    candidates = {pos: set(range(len(rules))) for pos in range(len(mine))}
+    validTickets = tickets[:]
 
     rate = 0
-    for i, t in enumerate(tickets):
-        for val in t:
-            if val in validCache: continue
+    for t in tickets:
+        for pos, val in enumerate(t):
             valid = False
-            for rule in allRules:
-                if between(val, rule[0], rule[1]):
+            for rn in range(len(rules)):
+                r1, r2, r3, r4 = [int(r) for r in rules[rn]]
+                if r1 <= val <= r2 or r3 <= val <= r4:
                     valid = True
-                    validCache.add(val)
                     break
             if not valid:
-                if part == 1: rate += val
-                if part == 2: tickets.pop(i)
+                rate += val
+                validTickets.remove(t)
                 break
+
     if part == 1: return rate
     if part == 2:
-        candidates = {
-            i: set(range(len(allRules) // 2))
-            for i in range(len(mine))
-        }
-        for ticket in tickets:
-            for i, val in enumerate(ticket):
-                discarded = set()
-                for rn in range(len(allRules) // 2):
-                    if rn not in candidates[i]: continue
-                    r1, r2 = (allRules[rn * 2], allRules[rn * 2 + 1])
-                    if not (between(val, r1[0], r1[1])) and not (between(
-                            val, r2[0], r2[1])):
-                        candidates[i].discard(rn)
-                        discarded.add(rn)
-                if len(discarded) >= 20:
-                    print(val, 'discarded')
-
-        return candidates
+        for t in validTickets:
+            for pos, val in enumerate(t):
+                for rn in range(len(rules)):
+                    if rn not in candidates[pos]: continue
+                    r1, r2, r3, r4 = [int(r) for r in rules[rn]]
+                    if not r1 <= val <= r2 and not r3 <= val <= r4:
+                        candidates[pos].discard(rn)
+        positions = {i: None for i in range(len(rules))}
+        while any([positions[p] is None for p in positions]):
+            for p in positions:
+                if len(candidates[p]) == 1:
+                    rule = next(iter(candidates[p]))
+                    positions[rule] = p
+                    for c in candidates:
+                        candidates[c].discard(rule)
+        return math.prod([
+            mine[pos]
+            for pos in [positions[pos] for pos in positions if pos < 6]
+        ])
 
 
 with open(f'{os.getcwd()}/16/input') as inputFile:
